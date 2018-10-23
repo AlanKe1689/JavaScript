@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Assignment 2 - Alan Ke</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			var timerG = null
+			var timerH = null
+			var gMovingRight = true
+			var hMovingRight = true
+			
+			function createAllElements(){
+				var div = document.createElement("div")
+				div.id = "div"
+				document.body.appendChild(div)
+					
+				var img1 = document.createElement("img")
+				img1.id = "img1"
+				img1.src = "images/a.png"
+				img1.width = 100
+				document.getElementById("div").appendChild(img1)
+					
+				var img2 = document.createElement("img")
+				img2.id = "img2"
+				img2.src = "images/b.png"
+				img2.width = 100
+				document.getElementById("div").appendChild(img2)
+					
+				var img3 = document.createElement("img")
+				img3.id = "img3"
+				img3.src = "images/c.png"
+				img3.width = 100
+				document.getElementById("div").appendChild(img3)
+					
+				var img4 = document.createElement("img")
+				img4.id = "img4"
+				img4.src = "images/d.png"
+				img4.width = 100
+				document.getElementById("div").appendChild(img4)
+					
+				var img5 = document.createElement("img")
+				img5.id = "img5"
+				img5.src = "images/e.png"
+				img5.width = 100
+				document.getElementById("div").appendChild(img5)
+				
+				var button = document.createElement("input")
+				button.id = "button"
+				button.type = "button"
+				button.style.width = "100px"
+				button.value = "f"
+				document.body.appendChild(button)
+				
+				document.body.appendChild(document.createElement("br"))
+					
+				var img6 = document.createElement("img")
+				img6.id = "img6"
+				img6.src = "images/g.png"
+				img6.width = 100
+				img6.style = "position:absolute;left:12px;top:190px"
+				document.body.appendChild(img6)
+				
+				document.body.appendChild(document.createElement("br"))
+					
+				var img7 = document.createElement("img")
+				img7.id = "img7"
+				img7.src = "images/h.png"
+				img7.width = 100
+				img7.style = "position:absolute;left:12px;top:297px"
+				document.body.appendChild(img7)
+			}
+			
+			function moveImageInDiv(){
+				var img1clicked = false
+				var img2clicked = false
+				var img3clicked = false
+				var img4clicked = false
+				var img5clicked = false
+				
+				document.getElementById("img1").onclick=function(){
+					if(img1clicked == false){
+						document.getElementById("div").insertBefore(this, document.getElementById("div").firstChild)
+						img1clicked = true
+					}
+				}
+				
+				document.getElementById("img2").onclick=function(){
+					if(img2clicked == false){
+						document.getElementById("div").insertBefore(this, document.getElementById("div").firstChild)
+						img2clicked = true
+					}
+				}
+				
+				document.getElementById("img3").onclick=function(){
+					if(img3clicked == false){
+						document.getElementById("div").insertBefore(this, document.getElementById("div").firstChild)
+						img3clicked = true
+					}
+				}
+				
+				document.getElementById("img4").onclick=function(){
+					if(img4clicked == false){
+						document.getElementById("div").insertBefore(this, document.getElementById("div").firstChild)
+						img4clicked = true
+					}
+				}
+				
+				document.getElementById("img5").onclick=function(){
+					if(img5clicked == false){
+						document.getElementById("div").insertBefore(this, document.getElementById("div").firstChild)
+						img5clicked = true
+					}
+				}
+			}
+			
+			function addRedBorder(){
+				$("#button").click(function(){
+					$("img").css("border", "1px red solid")
+				})
+			}
+
+			function moveLetterG(){
+				var doubleClickedG = false
+				var g = document.getElementById("img6")
+				
+				g.ondblclick=function(){
+					if(doubleClickedG == false){
+						if(timerG == null){
+							timerG = setInterval(moveGRight, 10)
+						}
+						else{
+							clearInterval(timerG)
+							timerG = null
+						}
+						doubleClickedG = true
+					}
+				}
+				
+				g.onclick=function(){
+					if(doubleClickedG == true){
+						if(gMovingRight == true){
+							if(timerG == null){
+								timerG = setInterval(moveGRight, 10)
+							}else{
+								clearInterval(timerG)
+								timerG = null
+							}
+						}else{
+							if(timerG == null){
+								timerG = setInterval(moveGLeft, 10)
+							}else{
+								clearInterval(timerG)
+								timerG = null
+							}
+						}
+						
+					}
+				}
+			}
+			
+			function moveGRight(){
+				var g = document.getElementById("img6")
+				g.style.left = parseInt(g.style.left) + 1 + "px"
+				if(parseInt(g.style.left) == window.innerWidth-100){
+					clearInterval(timerG)
+					timerG = setInterval(moveGLeft, 10)
+					gMovingRight = false
+				}
+			}
+			
+			function moveGLeft(){
+				var g = document.getElementById("img6")
+				g.style.left = parseInt(g.style.left) - 1 + "px"
+				if(parseInt(g.style.left) == 12){
+					clearInterval(timerG)
+					timerG = setInterval(moveGRight, 10)
+					gMovingRight = true
+				}
+			}
+			
+			function moveLetterH(){
+				var doubleClickedH = false
+				var h = document.getElementById("img7")
+				
+				h.ondblclick=function(){
+					if(doubleClickedH == false){
+						if(timerH == null){
+							timerH = setInterval(moveHRight, 10)
+						}else{
+							clearInterval(timerH)
+							timerH = null
+						}
+						doubleClickedH = true
+					}
+				}
+				
+				h.onclick=function(){
+					if(doubleClickedH == true){
+						if(hMovingRight == true){
+							if(timerH == null){
+								timerH = setInterval(moveHRight, 10)
+							}else{
+								clearInterval(timerH)
+								timerH = null
+							}
+						}else{
+							if(timerH == null){
+								timerH = setInterval(moveHLeft, 10)
+							}else{
+								clearInterval(timerH)
+								timerH = null
+							}
+						}
+					}
+				}
+			}
+			
+			function moveHRight(){
+				var h = document.getElementById("img7")
+				document.getElementById("img7").style.left = parseInt(h.style.left) + 2 + "px"
+				if(parseInt(h.style.left) == window.innerWidth-100){
+					clearInterval(timerH)
+					timerH = setInterval(moveHLeft, 10)
+					hMovingRight = false
+				}
+			}
+			
+			function moveHLeft(){
+				var h = document.getElementById("img7")
+				document.getElementById("img7").style.left = parseInt(h.style.left) - 2 + "px"
+				if(parseInt(h.style.left) == 12){
+					clearInterval(timerH)
+					timerH = setInterval(moveHRight, 10)
+					hMovingRight = true
+				}
+			}
+			
+			onload=function(){
+				var initialClicked = false
+				
+				window.onclick=function(){
+					if(initialClicked == false){
+						createAllElements()
+						moveImageInDiv()
+						addRedBorder()
+						moveLetterG()
+						moveLetterH()
+						initialClicked = true
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
